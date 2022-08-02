@@ -1,32 +1,47 @@
-# x = 1
-# def cat():
-#     print(cat)
-#     return 'may'
-#
-# cat()
+# функція може викликати інші функції
 def foo1():
     print('first')
+
 
 def foo2():
     foo1()
     print('wait')
 
+
 def foo():
     foo2()
     print('end')
 
-# foo()
-# Рекурсия
 
-def r(x: int) -> None:
-    if x < 10:
-        x += 1
-        r(x)
+# Рекурсія - називається виклик фунції самоЇ себе.
 
-    print(x)  # enclosed
+# V1 count down
 
 
-r(1)
+def count_down_to_zero(counter: int) -> None:
+    """
+    Функія працює як зворотнії лічильник.
+
+    Кожна рекурсивна функція будується з двох частин: базовий типу функції та рекурсивної частини.
+    :arg counter - integer,
+    :return None
+
+    """
+    print(counter)
+    if counter == 0:  # базова частина
+        return
+    else:
+        count_down_to_zero(counter - 1)  # рекурсивна частина
+
+
+# V2  Count down
+def count_down_to_zero_v2(counter: int) -> None:
+
+    if counter < 10:
+        counter += 1
+        count_down_to_zero_v2(counter)
+    print(counter)  # enclosed
+
 
 
 
@@ -45,4 +60,16 @@ def factorial_with_rec(x):
     arg = previouse * x
     return arg
 
+
 print(factorial_with_rec(5))
+if __name__ == '__main__':
+    # example 0
+    foo()
+
+    # example 1
+    count_down_to_zero(10)
+    # example 2
+    count_down_to_zero_v2(1)
+    # example 3
+    factorial_with_rec(5)
+
