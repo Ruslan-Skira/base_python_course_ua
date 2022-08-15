@@ -1,29 +1,18 @@
 # 1) Понятие класса и объекта
-"""Класс - это чертеж по которому создаются объекты
+# Класс - это чертеж по которому создаются объекты
 
-2) Объект - сущность созданная по определенному классу (чертежу),
-иногда его называют instance
+# 2) Объект - сущность созданная по определенному классу (чертежу),
+# иногда его называют instance
 
-
-Переходим к котикам
-OOP позволяет объединить данные и поведение"""
-
-
-class Cat(object):
-    def __init__(self, color='Black', age=1, name='murzik'):
+# Примеры с котиками сложные.
+class Cat:
+    def __init__(self, color='Black', age=1):
         self.color = color
         self.age = age
-        self.name = name
-
-    def may(self):
-        print(self.name, 'MAY')
 
 
 murzik: Cat = Cat()
-
 barsik: Cat = Cat(color='red')
-
-'''self ссылка сама на себя на объект'''
 
 
 # 3) Атрибуты классов и объектов (иногда их называют поля)
@@ -33,11 +22,10 @@ class Cat2:
     cats = []
 
     def __init__(self, color='Black', weight=0):
-        """создан для инициализации объекта не создания! За создание отвечает другой метод"""
         if weight:
             weight = self.get_av_weight()
 
-        # Обратите внимание, что внутри методов объектов будут доступны атрибуты класса
+        # Обратите внимение, что внутри методов объектов будут доступны атрибуты класса
         self.color = color  # Атрибут объекта
         self.weight = weight  # Атрибут объекта
 
@@ -56,6 +44,7 @@ class Cat2:
 average_cat_weight = Cat2.average_weight  # Обращение к атрибуту класса
 
 gosha = Cat2(weight=13)  # для обращения к атрибуту объекта нужно иметь объект!
+gosha.weight = gosha.weight  # Обращение к атрибуту объекта
 
 
 # Инициализация и некоторые магические методы
@@ -77,7 +66,7 @@ class Cat3:
         self.name = name
         self.weight = weight
 
-    def __str__(self) -> str:  # Вызывается при приведении объекта к строкеЮ например функцией str()
+    def __str__(self) -> str:  # Вызывается при приведении объекта к строке например функцией str()
         """Этот метод должен возвращать человеко-читаемое описание объекта"""
         return f"Cat with name: {self.name}"
 
@@ -142,6 +131,10 @@ kesha.mur()
 
 
 class Cat4:
+    """
+    class to show the @classmethod and @property
+    """
+
     average_weight = 4.1  # Атрибут класса
     cats = []
 
@@ -193,8 +186,81 @@ print('Толстые ли эти котики?', Cat4.is_fat_cat(c1))
 
 print(c1.volume)  # Вызовет метод volume, причем без использования оператора '()'
 
+# Eще один вариант
+"""Инициализация (от англ. initialization, инициирование)  создание, активация, подготовка к работе, определение параметров.
+ Приведение программы или устройства в состояние готовности к использованию
+ Приведение областей памяти в состояние, исходное для последующей обработки или размещения данных. [ГОСТ 19781 90]
+ """
 
-# Наследование
+
+# TODO: способы вызова метода из объекта и почему в селф ничего не передаем
+class T:
+    def look(self):
+        print(f'{T.__name__}')
+
+    def __str__(self):
+        return 'here will be smt interesting'
+
+
+t = T()
+t.look()
+t.__class__.look(t)
+f'{t}'
+
+
+# TODO: show difference attribute class and attribute instance
+class T():
+    move = 'wtf is going here'
+
+    def __init__(self):
+        self.move = 123
+
+
+t = T()
+
+print(t.move)
+
+print(T.move)
+
+
+#
+
+# TODO: Атрибуты
+class Counter_my(object):
+    all_counters = []
+
+    def __init__(self, initial_count=0):
+        Counter_my.all_counters.append(self)
+        self.count = initial_count
+
+
+c1 = Counter_my(2)
+c2 = Counter_my(3)
+assert len(Counter_my.all_counters) == 2
+assert c1.all_counters is c2.all_counters
+
+
+# TODO: Напишите свой класс родителя и ребенка и показать на примере инита как переписать c
+#  super. Показать что будет если переписать до супер и после
+
+
+class T():
+    def __init__(self, *args, **kwargs):
+        self.move = 123
+
+
+class B(T):
+    def __init__(self):
+        super().__init__()
+        self.move = 333
+
+
+b = B()
+
+b.move
+
+
+# Наследоваание
 
 class Transport:
     def __init__(self, max_move_speed=0):
@@ -208,13 +274,16 @@ class Car(Transport):
     def __init__(self, *args, model='', **kwargs):
         self.model = model
         super().__init__(*args, **kwargs)
+
         # super(Transport, self).__init__(*args, **kwargs)
 
     def move(self):
-        return f'car move with speed {self.max_move_speed}'
+        return f'car move with speed {self.max_move_speed}'  # TODO: rewrite to "return f'car {super().move()}'"
+
+    # TODO: покажи как работает метод __str__  в принте. и в строке f'{b1}
 
 
-some_transport = Transport(max_move_speed=50)
+some_transport = Transport(max_move_speed=50)  # неявно вызывается демон ой __init__() поэтому он и магический.
 car1 = Car(max_move_speed=350, model='Tesla X')
 
 
@@ -232,6 +301,26 @@ class AirCar(Car, AirPlane):
     pass
 
 
+# TODO: Create class User and 3 methods 1. get_age, 2. set_age(value), 3. delete_age
+
+
+class Temperature:
+    def __init__(self, *args, celsius=0):
+        self.celsius = celsius
+
+    @property
+    def fahrenheit(self):
+        return self.celsius * 9 / 5 + 32
+
+    @fahrenheit.setter
+    def fahrenheit(self, value):
+        self.celsius = (value - 32) * 5 / 9
+
+    @fahrenheit.deleter
+    def fahrenheit(self):
+        self.celsius = 0
+
+
 class Counter:
     def __new__(cls):
         obj = super(Counter, cls).__new__(cls)
@@ -239,6 +328,9 @@ class Counter:
             cls.objects_list = []
         cls.objects_list.append(obj)
         return obj
+
+
+c = Counter()
 
 
 class Singleton:
