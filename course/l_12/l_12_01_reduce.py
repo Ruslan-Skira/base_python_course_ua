@@ -1,7 +1,7 @@
 """https://docs.python.org/3/library/functools.html#functools.reduce"""
 from functools import reduce
 
-'''Применяет функции к парам элементов. Накапливает результат'''
+'''Функция reduce применяет функции к парам элементов и накапливает результат'''
 
 
 def f(a, b):
@@ -16,7 +16,7 @@ def my_sum(first, second):
     return first + second
 
 
-progression = reduce(lambda a, b: a + b, (1, 2, 3,), 100)
+progression = reduce(lambda a, b: a - b, (1, 2, 3,), 100)
 
 print(progression)
 
@@ -38,7 +38,7 @@ concat_list = reduce(add, lists)
 print(concat_list)
 
 
-# reduce function roughly equivalent to:
+# эквивалент функции reduce. Советую разовраться как работает.
 def reduce_my(function, iterable, initializer=None):
     it = iter(iterable)  # make iterator
     if initializer is None:

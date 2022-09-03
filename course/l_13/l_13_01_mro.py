@@ -1,5 +1,5 @@
 class FGrandFather():
-    # surname = 'Douglas'
+    surname = 'Douglas'
     pass
 
 
@@ -8,27 +8,25 @@ class FGrandMother():
 
 
 class MGrandFather():
+    surname = 'Chita'
+
     pass
 
 
 class MGrandMother():
+    eyes_color = 'green'
     pass
 
 
 class Mother(MGrandFather, MGrandMother):
     height = 150
-    surname = 'Chita'
 
 
 class Father(FGrandFather, FGrandMother):
-    # surname = 'Duglassito'
-    eyes_color = 'green'
     pass
 
 
-# class Neigbor():pass
-
-class Son(Mother, Father):
+class Son(Father, Mother):
     # eyes_color = 'blue'
     pass
 
@@ -43,3 +41,4 @@ if __name__ == "__main__":  # точка входу в код.
     i_am = Son()
     print(i_am.eyes_color)
     print(i_am.height)
+    print(i_am.surname)

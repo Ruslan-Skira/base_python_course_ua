@@ -5,6 +5,23 @@
 
 # TODO: Create class User and 3 methods 1. get_age, 2. set_age(value), 3. delete_age
 
+class User_my:
+    def __init__(self, age_user=None):
+        self.age_user = age_user
+
+    @property
+    def age(self):
+        return self.age_user
+
+    @age.setter
+    def age(self, value):
+        self.age_user = value
+
+    @age.deleter
+    def age(self):
+        self.age_user = 0
+
+
 class Temperature:
     """Class Temperature create object with possibility to work with celsius and fahrenheit"""
 
@@ -27,21 +44,6 @@ class Temperature:
         return self.celsius * 9 / 5 + 32
 
 
-class User_my:
-    def __init__(self, age_user=None):
-        self.age_user = age_user
-
-    @property
-    def age(self):
-        return self.age_user
-
-    @age.setter
-    def age(self, value):
-        self.age_user = value
-
-    @age.deleter
-    def age(self):
-        self.age_user = 0
 
 
 u1 = User_my()

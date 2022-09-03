@@ -4,47 +4,7 @@
 # 2) Объект - сущность созданная по определенному классу (чертежу),
 # иногда его называют instance
 
-# Примеры с котиками сложные.
-class Cat:
-    def __init__(self, color='Black', age=1):
-        self.color = color
-        self.age = age
 
-
-murzik: Cat = Cat()
-barsik: Cat = Cat(color='red')
-
-
-# 3) Атрибуты классов и объектов (иногда их называют поля)
-
-class Cat2:
-    average_weight = 4.1  # Атрибут класса
-    cats = []
-
-    def __init__(self, color='Black', weight=0):
-        if weight:
-            weight = self.get_av_weight()
-
-        # Обратите внимение, что внутри методов объектов будут доступны атрибуты класса
-        self.color = color  # Атрибут объекта
-        self.weight = weight  # Атрибут объекта
-
-        self.cats.append(self)
-
-    def get_av_weight(self):
-        if not self.cats:
-            return self.average_weight
-        sum_weight = 0
-        cats_count = len(self.cats)
-        for cat in self.cats:
-            sum_weight += cat.weight
-        return sum_weight / cats_count
-
-
-average_cat_weight = Cat2.average_weight  # Обращение к атрибуту класса
-
-gosha = Cat2(weight=13)  # для обращения к атрибуту объекта нужно иметь объект!
-gosha.weight = gosha.weight  # Обращение к атрибуту объекта
 
 
 # Инициализация и некоторые магические методы
@@ -129,7 +89,7 @@ kesha(action='Играться')
 
 kesha.mur()
 
-
+##################### Примеры с котиками сложные 1######################
 class Cat4:
     """
     class to show the @classmethod and @property
@@ -186,7 +146,49 @@ print('Толстые ли эти котики?', Cat4.is_fat_cat(c1))
 
 print(c1.volume)  # Вызовет метод volume, причем без использования оператора '()'
 
-# Eще один вариант
+##################### Примеры с котиками сложные 2######################
+class Cat:
+    def __init__(self, color='Black', age=1):
+        self.color = color
+        self.age = age
+
+
+murzik: Cat = Cat()
+barsik: Cat = Cat(color='red')
+
+
+##################### Примеры с котиками сложные 3######################
+
+class Cat2:
+    average_weight = 4.1  # Атрибут класса
+    cats = []
+
+    def __init__(self, color='Black', weight=0):
+        if weight:
+            weight = self.get_av_weight()
+
+        # Обратите внимение, что внутри методов объектов будут доступны атрибуты класса
+        self.color = color  # Атрибут объекта
+        self.weight = weight  # Атрибут объекта
+
+        self.cats.append(self)
+
+    def get_av_weight(self):
+        if not self.cats:
+            return self.average_weight
+        sum_weight = 0
+        cats_count = len(self.cats)
+        for cat in self.cats:
+            sum_weight += cat.weight
+        return sum_weight / cats_count
+
+
+average_cat_weight = Cat2.average_weight  # Обращение к атрибуту класса
+
+gosha = Cat2(weight=13)  # для обращения к атрибуту объекта нужно иметь объект!
+gosha.weight = gosha.weight  # Обращение к атрибуту объекта
+
+#################### Eще один вариант
 """Инициализация (от англ. initialization, инициирование)  создание, активация, подготовка к работе, определение параметров.
  Приведение программы или устройства в состояние готовности к использованию
  Приведение областей памяти в состояние, исходное для последующей обработки или размещения данных. [ГОСТ 19781 90]
